@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { API_BASE_URL } from '../apiConfig';
+import { UserCard } from './UserCard';
 
 export const ProfilePage = () => {
   // Verificar se o token de acesso está armazenado nos cookies
@@ -64,9 +65,7 @@ export const ProfilePage = () => {
   return (
     <div>
       <h1>Perfil do Usuário</h1>
-      <p>Username: {user.username}</p>
-      <p>Email: {user.email}</p>
-      <button onClick={logout}>Logout</button>
+      <UserCard user={user} logout={logout} />
     </div>
   );
 };

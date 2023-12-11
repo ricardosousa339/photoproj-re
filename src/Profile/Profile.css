@@ -1,0 +1,37 @@
+
+h1{
+    color: rgb(223, 223, 223);
+}
+.card{
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 250px;
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+}
+
+.card .card-image{
+    max-width: 60%;
+    height:auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.card .card-text{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-left: 0px;
+}
+
+.card .card-label{
+    text-align: left;
+    font-weight: bold;
+    font-size: large;
+}
+
+.card .card-value{
+    text-align: center;
+}
