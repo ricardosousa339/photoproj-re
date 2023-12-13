@@ -28,6 +28,8 @@ export const RegisterForm = () => {
         // Armazenar o token de acesso e o token de atualização nos cookies
         Cookies.set('access_token', response.data.access);
         Cookies.set('refresh_token', response.data.refresh);
+        Cookies.set('id', response.data.user.id);
+
       } catch (error) {
         console.error(error);
       }
