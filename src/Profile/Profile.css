@@ -35,3 +35,30 @@ h1{
 .card .card-value{
     text-align: center;
 }
+
+.card .button-user-photos{
+    background-color:rgb(109, 130, 199);
+    width: fit-content;
+    height: 40px;      
+}
+
+.card .button-user-logout{
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+.card .button-user-photos .icone-galeria{
+    width: 25px;
+    height: 25px;
+    filter: invert(100%);
+    margin-right: 5px;
+}
+
+.card .button-user-logout .icone-logout{
+    width: 25px;
+    height: 25px;
+    filter: invert();
+    margin-right: 5px;
+}

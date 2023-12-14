@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import './Login.css';
 import { API_BASE_URL } from '../apiConfig';
+import { getAccessToken, refreshAccessToken } from '../auth';
 
 export const LoginForm = () => {
   const [formLogin, setForm] = useState({
@@ -11,7 +13,7 @@ export const LoginForm = () => {
 
   const handleChange = (e) => {
     console.log(`Campo alterado: ${e.target.name}, Valor: ${e.target.value}`);
-    console.log(Cookies.get('access_token'))
+    console.log(getAccessToken())
     setForm({
       ...formLogin,
       [e.target.name]: e.target.value

@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './Login.css';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import ProfilePage from '../Profile/Profile';
-import Cookies from 'js-cookie';
+import { getAccessToken, logout } from '../auth';
 
 const Login = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get('access_token'));
+  const [isLoggedIn, setIsLoggedIn] = useState(!!getAccessToken());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsLoggedIn(!!Cookies.get('access_token'));
+      setIsLoggedIn(!!getAccessToken());
     }, 1000);
 
     return () => clearInterval(interval);
