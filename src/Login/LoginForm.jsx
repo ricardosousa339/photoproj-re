@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import './Login.css';
-import { API_BASE_URL } from '../apiConfig';
-import { getAccessToken, refreshAccessToken } from '../auth';
+import { API_BASE_URL } from '../Function/apiConfig';
+import { getAccessToken, refreshAccessToken } from '../Function/auth';
 
 export const LoginForm = () => {
   const [formLogin, setForm] = useState({
@@ -32,6 +32,7 @@ export const LoginForm = () => {
       Cookies.set('access_token', response.data.access);
       Cookies.set('refresh_token', response.data.refresh);
       Cookies.set('id', response.data.user.id);
+      Cookies.set('email', response.data.user.email)
 
     } catch (error) {
       console.error(error);

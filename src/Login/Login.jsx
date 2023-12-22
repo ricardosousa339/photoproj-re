@@ -3,7 +3,7 @@ import './Login.css';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import ProfilePage from '../Profile/Profile';
-import { getAccessToken, logout } from '../auth';
+import { getAccessToken, logout } from '../Function/auth';
 
 const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!getAccessToken());

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { UserCard } from './UserCard';
-import { getAccessToken, refreshAccessToken, logout } from '../auth';
+import { getAccessToken, refreshAccessToken, logout } from '../Function/auth';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';
+import { API_BASE_URL } from '../Function/apiConfig';
 import Cookies from 'js-cookie';
 
 export const ProfilePage = () => {

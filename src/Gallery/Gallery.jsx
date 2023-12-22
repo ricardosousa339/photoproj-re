@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { API_BASE_URL } from '../apiConfig';
-import {getAccessToken } from '../auth';
+import { API_BASE_URL } from '../Function/apiConfig';
+import {getAccessToken } from '../Function/auth';
 import Cookies from 'js-cookie';
+import UploadForm from './UploadForm';
+import { useLocation } from "react-router-dom";
 
-const PhotoList = (user) => {
+
+const Gallery = () => {
   const [photos, setPhotos] = useState([]);
   const id = Cookies.get('id');
+  const { state } = useLocation();
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}`+'/api/photos/user_photos/'+`${id}`, {
+    fetch(`${API_BASE_URL}`+'/api/photo/user_photos/'+`${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        // inclua aqui seu token de autenticação
         'Authorization': `Token ${getAccessToken()}`,
       },
     })
@@ -25,14 +28,10 @@ const PhotoList = (user) => {
 
   return (
     <div>
-      {photos.map((photo) => (
-        <div key={photo.id}>
-          <h2>{photo.titulo}</h2>
-          <img src={photo.imagem} alt={photo.titulo} />
-        </div>
-      ))}
+     
+      <UploadForm user = {useLocation.user}/>
     </div>
   );
 }
 
-export default PhotoList;
+export default Gallery;
