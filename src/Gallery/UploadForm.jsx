@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import uploadImage from '../Function/uploadImage.jsx';
 import { API_BASE_URL } from '../Function/apiConfig.js';
 import Cookies from 'js-cookie';
 
-const UploadForm  = (user) => {
+const UploadForm  = () => { // Recebe o ID do usuário como prop
   const [selectedFile, setSelectedFile] = useState(null);
+
+  const userId = Cookies.get('id')
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -12,17 +13,14 @@ const UploadForm  = (user) => {
 
   const handleUpload = async () => {
 
-    const url = API_BASE_URL+'/api/photo/'; // Substitua isso pela URL correta
-    const token = Cookies.get('access_token'); // Substitua isso pelo token real do usuário
+    const url = `${API_BASE_URL}api/photo/`;
+    const token = Cookies.get('access_token');
     console.log('token do usuário check:'+token)
-    const id = Cookies.get('id');
-    const email = Cookies.get('email')
-    const sessionid = Request.session_key;
-    console.log(user.email)
+    console.log('ID do usuário:', Number(userId)); // Mostra o ID do usuário nos logs
     const data = new FormData();
-    data.append('imagem', selectedFile); // Substitua isso pela imagem real
+    data.append('imagem', selectedFile);
     data.append('titulo', "Titulo da foto")
-    data.append('user',id);
+    data.append('user', userId);
     fetch(url, {
       method: 'POST',
       headers: {
@@ -37,9 +35,6 @@ const UploadForm  = (user) => {
     .catch((error) => {
       console.error('Error:', error);
     });
-    
-
-
   };
 
   return (

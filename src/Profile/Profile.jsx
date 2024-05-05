@@ -11,14 +11,14 @@ export const ProfilePage = () => {
 
   if (!access_token) {
     // Redirecionar para a página de login se o token de acesso não estiver definido
-    window.location.href = '/login';
+    window.location.href = 'login';
   }
 
   // Obter informações do usuário usando o token de acesso
   const [user, setUser] = useState({});
   const getUserInfo = async (accessToken = access_token) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/user/${id}`, {
+      const response = await axios.get(`${API_BASE_URL}api/user/${id}/`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

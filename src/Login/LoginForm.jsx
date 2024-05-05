@@ -25,7 +25,7 @@ export const LoginForm = () => {
     try {
       console.log(formLogin);
       const response = await axios.post(`${API_BASE_URL}`+'api/auth/login/', formLogin);
-      console.log(response.data +'resposta  ');
+      console.log(response +'resposta  ');
       console.log('resposta')
 
       // Armazenar o token de acesso e o token de atualização nos cookies
@@ -33,6 +33,11 @@ export const LoginForm = () => {
       Cookies.set('refresh_token', response.data.refresh);
       Cookies.set('id', response.data.user.id);
       Cookies.set('email', response.data.user.email)
+
+      console.log(response.data.access)
+      console.log(response.data.id)
+      Cookies.get('access_token');
+      
 
     } catch (error) {
       console.error(error);
