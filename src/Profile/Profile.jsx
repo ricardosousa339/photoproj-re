@@ -26,7 +26,7 @@ export const ProfilePage = () => {
       setUser(response.data);
     } catch (error) {
       console.error(error);
-      if(error.response.data && error.response.data.code == 'token_not_valid'){
+      if(error.response.data && error.response.data.code === 'token_not_valid'){
         const new_access_token = await refreshAccessToken();
         getUserInfo(new_access_token);
       }
@@ -36,14 +36,14 @@ export const ProfilePage = () => {
 
   useEffect(() => {
     getUserInfo();
-  }, []);
+  });
 
   return (
-    <div>
+    <div className='body'>
       <h1>Perfil do Usuário</h1>
       <UserCard user={user} logout={logout} />
       <footer>
-        <p><a href="https://www.flaticon.com/free-icons/picture" title="picture icons">Picture icons created by Pixel perfect - Flaticon</a></p>
+        <p className='rodape'><a href="https://www.flaticon.com/free-icons/picture" title="picture icons">Picture icons created by Pixel perfect - Flaticon</a></p>
       </footer>
     </div>
   );

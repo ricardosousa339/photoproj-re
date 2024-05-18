@@ -44,7 +44,7 @@ export const RegisterForm = () => {
           <input type="email" name="email" placeholder="Email" required onChange={handleChange} />
           <input type="password" name="password" placeholder="Senha" required onChange={handleChange} />
           <input type="password" name="password2" placeholder="Confirme a senha" required onChange={handleChange} />
-          <button type="submit">Cadastro</button>
+          <button className='button' type="submit">Cadastro</button>
         </form>
       </div>
     );

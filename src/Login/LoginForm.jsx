@@ -50,7 +50,7 @@ export const LoginForm = () => {
         <label htmlFor="chk" aria-hidden="true">Login</label>
         <input type="email" name="email" placeholder="Email" required onChange={handleChange} />
         <input type="password" name="password" placeholder="Senha" required onChange={handleChange} />
-        <button type="submit">Login</button>
+        <button className= 'button' type="submit">Login</button>
       </form>
     </div>
   );

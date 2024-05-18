@@ -3,9 +3,15 @@ import { API_BASE_URL } from '../Function/apiConfig';
 import { getAccessToken } from '../Function/auth';
 import UploadForm from './UploadForm';
 import axios from 'axios';
+import './Gallery.css';
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 
 const Gallery = () => {
   const [photos, setPhotos] = useState([]);
+  const [temFotoNova, setTemFotoNova] = useState(false);
 
   const access_token = getAccessToken();
 
@@ -27,58 +33,40 @@ const Gallery = () => {
         }
       );
       setPhotos(response.data)
-      console.log(response.data, "Responseeee-----------")
+
     }
-    catch(error){
+    catch (error) {
       console.error(error, "://///////");
-  }
-    
+    }
+
   }
 
   useEffect(() => {
     fetchPhotos();
-  }, []);
-
-  /*
-  useEffect(() => {
-    const fetchPhotos = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}api/photo/user_photos/`,{
-          headers: {
-            Authorization: `Bearer ${getAccessToken()}`,
-          },
-        })
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+    setTemFotoNova(false)
+  }, [temFotoNova]);
 
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch photos');
-        }
-        const data = await response.json();
-        setPhotos(data);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    fetchPhotos();
-  }, []);
-*/
   return (
-    <div>
-      {photos.map(photo => (
-        <div key={photo.id}>
-          <img src={photo.imagem} alt={photo.titulo} />
-        </div>
-      ))}
-      <UploadForm />
+    <div className='pagina'>
+      <div className='photo-grid'>
+        {photos.map((photo, index) => (
+          <div key={index} className='photo-item' >
+            <div className='imagem' src={photo.imagem}>
+
+              <img className='miniatura' src={photo.imagem} alt={photo.titulo} />
+            </div>
+            <div className='containerBotaoDeletar'>
+              <button className='botao button-deletar'><FontAwesomeIcon icon={faTrash} /></button>
+            </div>
+
+          </div>
+        ))}
+      </div>
+      <UploadForm temFotoNova={temFotoNova} setTemFotoNova={setTemFotoNova}/>
     </div>
   );
+
 }
 
 export default Gallery;

@@ -18,10 +18,13 @@ const Login = () => {
 
   if(!isLoggedIn){
     return (
+      <div className='body'>
       <div className="main">
         <input type="checkbox" id="chk" aria-hidden="true" />
         <RegisterForm />
         <LoginForm />
+      </div>
+
       </div>
     );
   }
