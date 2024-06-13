@@ -36,7 +36,7 @@ export const ProfilePage = () => {
 
   useEffect(() => {
     getUserInfo();
-  });
+  },[access_token]);
 
   return (
     <div className='body'>

@@ -1,17 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { API_BASE_URL } from '../Function/apiConfig';
-import { getAccessToken } from '../Function/auth';
-import UploadForm from './UploadForm';
-import axios from 'axios';
-import './Gallery.css';
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 
 
 const Gallery = () => {
   const [photos, setPhotos] = useState([]);
   const [temFotoNova, setTemFotoNova] = useState(false);
+  const [fotoADeletar, setFotoADeletar] = useState(null);
 
   const access_token = getAccessToken();
 
@@ -32,38 +24,73 @@ const Gallery = () => {
           },
         }
       );
+
+
       setPhotos(response.data)
+      setTemFotoNova(false)
 
     }
     catch (error) {
       console.error(error, "://///////");
+      const response = await axios.get(`${API_BASE_URL}api/photo/`,{
+        headers: {
+          Authorization: `Bearer ${refreshAccessToken()}`
+        }
+      });
+
+      setPhotos(response.data);
+      setTemFotoNova(false)
     }
 
   }
 
+  const deletePhoto = async (photoId) => {
+    try {
+      const response = await axios.delete(`${API_BASE_URL}/api/photo/${photoId}/delete_photo/`);
+      console.log('Foto deletada com sucesso\n', response);
+      setFotoADeletar(null)
+    } catch (error) {
+      console.error('Erro ao deletar a foto', error);
+    }
+  };
+
+
   useEffect(() => {
     fetchPhotos();
-    setTemFotoNova(false)
+
   }, [temFotoNova]);
+
+
+  useEffect(() => {
+    if (fotoADeletar)
+      deletePhoto(fotoADeletar);
+
+    console.log(fotoADeletar);
+
+  }, [fotoADeletar])
 
 
   return (
     <div className='pagina'>
       <div className='photo-grid'>
         {photos.map((photo, index) => (
-          <div key={index} className='photo-item' >
-            <div className='imagem' src={photo.imagem}>
 
-              <img className='miniatura' src={photo.imagem} alt={photo.titulo} />
-            </div>
-            <div className='containerBotaoDeletar'>
-              <button className='botao button-deletar'><FontAwesomeIcon icon={faTrash} /></button>
-            </div>
+          <div key={index} className='photo-item'>
+            {fotoADeletar == photo.id ? <div className='loader-container'><span className="loader"></span></div> :
+              <div className='imagem' src={photo.imagem} style={{ backgroundColor: photo.main_color }}>
 
+                <img className='miniatura' src={photo.imagem} alt={photo.titulo} />
+              </div>
+            }
+            <div className='containerBotaoDeletar' >
+              <button className='botao button-deletar' onClick={() => setFotoADeletar(photo.id)}><FontAwesomeIcon icon={faTrash} /></button>
+            </div>
           </div>
         ))}
+        {temFotoNova && <div className='loader-container'><span className="loader"></span></div>}
       </div>
-      <UploadForm temFotoNova={temFotoNova} setTemFotoNova={setTemFotoNova}/>
+
+      <UploadForm temFotoNova={temFotoNova} setTemFotoNova={setTemFotoNova} />
     </div>
   );
 

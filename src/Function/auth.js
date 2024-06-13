@@ -3,6 +3,11 @@ import Cookies from 'js-cookie';
 import { API_BASE_URL } from './apiConfig';
 
 export const getAccessToken = () => {
+console.log(Cookies.get('access_token'));
+  // try{
+  //   const response = await axios.post(`${API_BASE_URL}`+'api/auth/login/', formLogin);
+  //   console.log(response);
+  // }
   return Cookies.get('access_token');
 }
 
